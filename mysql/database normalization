@@ -1,0 +1,113 @@
+First Normal Form
+A table is supposed to be in first normal form if,
+
+
+
+All the attributes are single-valued (atomic).
+All the columns have unique names.
+The order in which data is stored does not matter.
+it maintains the data integrity
+
+
+
+example
+--------
+userid  | firstname | lastname | address
+5       |   atique  | bokhari | ballari,karnataka,583201
+
+the above example is not in 1NF we need break address into different 
+columns single value
+
+user            
+user_id         
+Firstname
+lastname
+city
+state
+pincode
+
+
+2NF
+A table is supposed to be in second normal form if,
+
+It should be in  1st normal form.
+It does not have any partial dependency
+
+example
+Player_inventory
+-------------
+player_id
+item_type
+item_quantity
+player_rating(partial dependency)
+
+solution
+player
+-----
+player_id
+player_rating
+
+Player_inventory
+-------------
+player_id
+item_type
+item_quantity
+
+how non keys column relate to the primary key (player_id, item_type)
+
+third normal form(3NF)
+
+player
+-----
+player_id
+player_rating
+player_skill_level
+
+
+
+problem
+player_id -> {player_Skill_level}
+{player_id} -> {player_Skill_level} -> {player_rating}
+
+dependency non key attribute to non key attribute
+
+
+solutions
+
+player
+-----
+player_id(PK)
+player_skill(FK)
+--------------
+player_skill_level
+---------
+id
+player_rating
+
+
+4NF
+module_colour
+-----
+model
+colord
+style
+
+model ->> color
+model ->> color
+
+multi valued dependencies in a table must be 
+
+
+indexing
+------
+
+users
+------
+id(PK)
+name(VARCHAR)
+is_subscribed(boolean)
+
+
+
+
+

@@ -1,0 +1,33 @@
+
+Ruby on Rails is a Web application framework that simplies web development 
+by providing well defined struture .it follows the MVC architecture
+Rails has rich pre built in tools and libraries that handles the 
+database management , handling requests , routing.it also provides 
+ecosystem to additional functionality to our web application using gems
+
+gems are similiar to npm packages which can be installed in our 
+application and use them as per the needs
+
+transaction ensures that a series of database operations
+ either all succeed or none of them are applied
+
+ It wraps multiple database actions within a block, 
+ and if any operation fails Rails automatically roll back
+ it prevents partial updates
+
+ In Relational Database Management Systems (RDBMS), 
+ indexing is a technique used to 
+ speed up the retrieval of data from a database
+ indexes are commonly created on columns that are being 
+ frequently retrived from the database
+
+ Concerns When Creating New Indexes:
+ write performance overhead: while indexes speeds up reads
+ they slow write db operations  like INSERT,UPDATE
+ because the database needs to update the index 
+ whenever data in the indexed columns changes.
+
+ Over-indexing: Creating too many indexes can lead to
+  diminishing returns. Each additional index can introduce
+   overhead reduces query performances 
+

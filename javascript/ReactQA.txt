@@ -1,0 +1,122 @@
+React create  as virtual DOM refering to DOM
+whenever  the component state changes or event occurs react uses the 
+diffing algo identifies the changes in virtual DOM and reconciliation 
+where it updates the virtual DOM with the result of diff
+React performs Efficent DOM manipulation
+
+ref 
+
+props are similar to arguments that can be passed to component
+
+Context API way pass data through Component Tree without having passing 
+props down manually at each level
+
+React Hooks are the functions that let you hook react state and lifecycle
+methods
+they let you use the state and other react features like life cycle
+without writing the class
+
+
+
+Difference class based component vs functional component
+class based component uses the es6 classes which extend the React.Component
+
+
+functional component are just like functions that return  the jsx 
+class based component are used for legacy projects
+functional component are used in modern projects
+explain redux both on RCC and RFC
+
+
+state is component  state that can be mutated using the user events and Hooks\
+props are the arguments that are passed to the component they are used for 
+read only purpose
+
+react lifecycle
+Mounting
+Updating
+Unmounting
+
+difference between controlled component and uncontrolled component
+The difference between Controlled Components and Uncontrolled Components in React:
+
+Controlled Components:
+
+The form data is handled by the React component's state.
+The input value is controlled by state and updated using setState or useState.
+Example: <input value={this.state.value} onChange={this.handleChange} />
+Uncontrolled Components:
+
+The form data is handled by the DOM directly.
+The input value is managed using refs to access DOM elements.
+Example: <input ref={this.inputRef} /> with this.inputRef.current.value.
+
+usestate manages the component state without interacting with the DOM
+useRef directly interacts with  DOM 
+
+Controlled components rely on event handlers (e.g., onChange)
+ to update the state. 
+ These event handlers modify the component's state,
+  triggering re-renders as needed.
+
+super(props) inherits props of the parent component
+
+componentDidMount()
+The componentDidMount() method is called after the component is rendered.
+componentDidUpdate()
+The componentDidUpdate method is called after the component is updated in the DOM.
+componentWillUmount()
+The next phase in the lifecycle is when a component is removed from the DOM, or unmounting as React likes to call it.
+
+Mounting means putting elements into the DOM.
+
+
+
+chunking :- code spilting process which bundles the components into 
+multiple logical js files
+
+
+useEffect is hook
+
+useEffect(()=>{
+
+},[])
+if dependency array is not present  then it runs on each render
+if dependency array is  present  then it runs on only after the
+initial component  render
+if dependency array has value based on value changes it runs everytime
+
+
+prevent component from rendering 
+memoization
+usecallback
+useMemo
+
+prop drilling
+
+Batching in React
+ perform multiple operations on the value before queueing the next render.
+process multiple state updates
+setNumber(number + 1)
+setNumber(n => n + 1)
+
+
+
+design patterns
+Singleton Pattern
+ Ensures a class has only one instance and provides a global point of access to it.
+Prototype pattern 
+
+The Prototype pattern is a design pattern that allows you to create new objects by copying an existing object, known as the prototype
+
+Factory pattern
+: Provides an interface for creating objects but allows subclasses to alter the type of objects created.
+
+3. Abstract Factory Pattern
+Purpose: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+4. Decorator Pattern
+Purpose: Adds behavior to individual objects dynamically without affecting the behavior of other objects from the same class.
+
+5. Observer Pattern
+Purpose: Defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically

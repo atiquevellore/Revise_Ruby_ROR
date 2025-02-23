@@ -1,0 +1,146 @@
+create a table
+
+example
+CREATE TABLE celebs (
+    id INTEGER
+    name VARCHAR(25)
+    age INTEGER
+)
+
+INSERT data into table
+INSERT INTO celebs(id,name,age) values ('1','atique','24')
+
+SELECT retrives the record from the table
+
+SELECT  * from celebs;
+
+SELECT name from celebs; (selecting individual column)
+
+ALTER (to add a new column to the table)
+
+ALTER TABLE celebs
+ADD COLUMN genere VARCHAR(25)
+
+UPDATE(updates the data in the table )
+UPDATE celebs
+SET genere = 'ACTION' WHERE id = '1'
+
+
+DELETE(delete a row based on the condition)
+
+DELETE FROM celebs WHERE genere IS NUll
+
+
+DISTINCT (it  return unique from the table )
+
+SELECT DISTINCT name FROM celebs 
+
+
+WHERE (condition clause )
+
+SELECT * FROM celebs WHERE genere='Action';
+
+LIKE 
+(A% retrives all the record beging with A)
+(%A retrvies all the record ending with A)
+(%pattern% matches the pattern)
+
+SELECT * FROM celebs WHERE name LIKE 'Se_en'
+
+SELECT * FROM celebs WHERE name LIKE 'A%'
+
+IS NUll and IS NOT NUll
+-------------------------
+
+SELECT * FROM celebs WHERE name IS NUll
+
+SELECT * FROM celebs WHERE genere IS NOT NUll
+
+BETWEEN (retrives all the record with in the range)
+SELECT * FROM movies WHERE year BETWEEN 1960 AND  1979
+
+ORER(retrives the record based on the column and ordering in ASC or DESC)
+
+SELECT  * FROM celebs ORER BY name
+SELECT * FROM celebs ORER BY genere DESC
+
+LIMIT (retriving limited set of record)
+
+SELECT * from celebs LIMIT 10;
+
+
+Aggregrate Funtion
+
+COUNT(count rows of a table)
+
+SELECT COUNT(*) AS ACTION_STARS FROM celebs where genere  = 'Action';
+
+SUM (added all the values of the specified column)
+MAX(return highest value from the column)
+
+SELECT MAX(price) FROM stock;
+
+MIN(return minimum value from the column)
+SELECT MAX(price) FROM stock;
+
+GROUP BY (grouping the data based on column)
+
+SELECT  * FROM celebs group by name
+
+SQL JOINS
+-------------
+
+INNER JOIN
+
+joining artist and ablum table
+SELECT * FROM ARTIST INNER JOIN ALBUM ON ARTIST.id = ALBUM.id
+
+
+SELF join (you can a join a table to itself it should columns which matching
+data like employee table containing manager id and 
+also cat table containing owner id)
+
+SELECT catname, owner_name FROM CAT JOIN CAT AS OWNER ON 
+CAT.cat_sid = OWNER.owner.id
+
+OUTER JOIN 
+FULL OUTER JOIN (provides all the matching  records from the joined tables if there are not match it return null)
+
+SELECT * FROM tableA FULL OUTER JOIN tableB ON tableA.id = tableB.id
+
+LEFT JOIN OR LEFT OUTER JOIN
+(provides all the record matching rows and null if not matching on the right table)
+
+SELECT * FROM employee LEFT JOIN departement ON employee.id = departement.id
+
+RIGHT JOIN
+(provides all the record matching rows and null if not matching on the left table)
+SELECT * FROM employee LEFT JOIN departement ON employee.id = departement.id
+
+FULL JOIN (retrvies all the matching records )
+Full Outer Join: Returns all records when there is 
+a match in either the left or right table, 
+filling in NULL where there is no match.
+
+Cartesian Join (Cross Join): Returns the Cartesian product of two tables, i.e., every row of the first table is combined with every row of the second table.
+
+CROSS JOIN (produces carties product of two tables)
+
+SELECT * FROM employee CROSS JOIN  departments;
+
+SELECT UPPERCASE(EMPFNAME) AS EmpName FROM employee
+
+SELECT COUNT(*) FROM employee WHERE departement='HR'
+
+SELECT * FROM employee WHERE name  LIKE 'S%'
+
+SELECT * FROM EmployeeInfo ORDER BY Department, EmpLname DESC
+
+SELECT * FROM EmployeeInfo where EmpFname LIKE '%a'
+
+
+
+
+
+
+

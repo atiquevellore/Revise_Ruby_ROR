@@ -1,0 +1,75 @@
+Database Design for Train Booking System
+
+Requirements 
+A train start and end at a station also can stop at different stations
+during journey
+
+Train_station
+------
+id (PK)
+station_name (VARCHAR)
+
+
+journey_station
+-----------
+journey_id(FK)
+station_id(FK)
+stop_order
+depature_time
+
+
+
+train_journey
+id (PK)
+schedule_id
+name 
+
+
+schedule
+---
+id (pk)
+name
+
+journey_carriage
+--------------
+FK  journey_id
+FK carriage_class_id
+position
+
+
+carriage_class
+---------
+id (PK)
+class_name
+seating_capacity
+
+carriage_price
+FK schedule_id
+FK carriage_class_id
+    price (INTEGER)
+
+
+Booking
+id 
+booking_date
+train_journey_id(FK)
+starting_station_id(FK)
+ending_station_id(FK)
+amount_paid
+ticket_no
+seat_no 
+passenger_id (FK)
+status_id(FK)
+
+passanger
+-------
+id
+first_name
+last_name
+email_addres
+password
+
+booking_status
+------
+id 
+name

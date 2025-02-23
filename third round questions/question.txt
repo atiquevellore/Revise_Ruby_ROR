@@ -1,0 +1,61 @@
+1. info about the company
+
+Codemancers is a boutique technology consulting firm that work on various domains
+and tackles complex engineering challenges and develops Software Solutions
+
+2. vison of the company
+   Codemancers aims to be a trusted partner for companies 
+   looking to build and scale their software products. 
+   They strive to deliver excellence in software craftsmanship, ensuring that the solutions they create not only meet but exceed client expectations.
+
+3. Introduction about me
+
+   Hi I am Mohammed Atique, Associate Software Engineer at Oracle Cerner specialized in build web application using react , ruby on rails technologies
+
+4. why do you want to join this company and how do you see yourself contributing to our projects?
+   I’m interested in joining Codemancers because of the opportunity to work on diverse domains and tackle complex engineering problems, 
+   which will allow me to learn and leverage my skills. Additionally, I prefer the work-from-office mode as it enhances team collaboration, something I value highly
+5. Reason for job change
+   "I was laid off due to organizational restructuring. I am now looking for new opportunities where I can continue to grow and contribute my skills to the company.   
+6. what motivates you at work
+   The opportunity to solve challenging problems and see the impact of my contributions
+   Seeing a project go from concept to completion and bringing value to the customer satisfaction is what 
+7. where do you see yourself in next 5 years
+   In the next  5 years advancing my the technical expertise and aim to grow to lead  role  where i can mentor others and contribute to the strategic direction to company projects.
+
+8. how do you handle production break and if you are working on critical task
+   in case production break need to check serverity and p
+9. how do you handle malicious content is uploaded to your website.
+10. what are your strengths and weakness.
+11. what are you hobbies.
+    playing video games
+    reading religious book
+
+12. Mention your desire to continuously improve your skills and take on new challenges.
+13. How would you implement real-time features like notifications or live updates in a Rails application?.
+     
+14.  How do you approach database optimization in a Rails application?.
+      
+15. How do you optimize the performance of a Rails application under heavy load?.
+16. Can you give an example of a complex third-party integration you’ve worked on in Rails?.
+17. How do you prioritize tasks when working on multiple projects with tight deadlines?.
+18. Describe a challenging bug you encountered in Rails how did you resolve it.
+19. How do you ensure your code is maintainable and follows best practices?
+20. How do you collaborate with other developers and stakeholders in an Agile environment?
+    
+21. What do you think are the biggest challenges of working in a startup environment, and how would you overcome them?
+22.  How do you stay updated with the latest trends and best practices in Rails?
+23  how i can add value to the  company or why should we hire you
+24.  2 reason why do you want the job
+25. end of interview - 
+    1. 
+    2. 
+    3.
+26. what sets you apart from outside
+27. what are you long term career goals
+28. how do you handle challenges and conflict in the workplace
+29. how do you handle feedback or criticism
+30. what will you do first 30 days of starting work in this position
+31. 
+
+

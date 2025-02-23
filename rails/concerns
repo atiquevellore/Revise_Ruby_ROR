@@ -1,0 +1,4 @@
+Concerns are ideal for sharing code between models, controllers, or other classes with similar functionality. If you repeat code between models or controllers, a concern might be a good extraction.
+
+
+Modules are better suited for creating a namespace for utility methods or encapsulating complex logic. 

@@ -1,0 +1,22 @@
+typeof determines the type of given value 
+
+Object is similar to hashmap which contains key  value pairs 
+
+
+strict comparision === checks for the value and also matching datatype 
+
+abstract comparision == checks for the value without checking
+datatype matching
+
+
+let is used declare the variable it is primarly used in functions
+or block methods
+
+closure
+function currying
+event  bubbling
+debouncing
+throttling
+callback hell
+asyn await,promises
+callback functions

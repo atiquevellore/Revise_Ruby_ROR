@@ -1,0 +1,25 @@
+#indexing
+
+Users
+------- 
+id (PK)
+name(VARCHAR)
+is_subscribed(boolean)
+
+SELECT * FROM Users WHERE name = 'atiqu'
+
+FULL table scan 
+
+create a file containing
+block
+index
+
+cons of indexes
+multiple indexes
+write operations
+insert
+update 
+delete
+
+
+CREATE INDEX idx_users ON users(username)
