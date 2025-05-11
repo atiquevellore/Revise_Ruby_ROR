@@ -27,7 +27,7 @@ c = "hello world"
 c.upcase! #convert string characters to uppercase
 c.downcase! #convert string characters to downcase
 
-#string interploation
+#string interploation it can be used in logging
 puts "display #{C}"
 
 #string iteration
@@ -35,7 +35,7 @@ c.each_char {|char| puts char}
 
 #gsub vs sub
 #gsub replace all the occurencess with given replacement character
-#sub replaces on the first occurence character
+#sub replaces only  the first occurence character
 str1 = "hello"
 str1.gsub('l','b')
 str1.sub('b','c')
@@ -49,7 +49,7 @@ input = gets.chomp();
 str = "hello"
 str.reverse
 str.split('') #converts str into arr
-str.join(',')
+str.join(',') #  join the arrays of str chars into a single str
 
 
 
@@ -92,10 +92,7 @@ arr.shift #removes first element from arr
 
 #loop method
 
-
-
 #for loop can be used while doing DSA
-
 
 #inclusive range means included
 #.. means it is inclusive range
@@ -105,6 +102,8 @@ arr.shift #removes first element from arr
 for i in 0..arr.length-1
     print arr[i]
 end
+
+
 
 #not  recommended can lead to infinity
 while i < 10
@@ -124,7 +123,6 @@ arr.select { |ele| ele > 3}
 #sorting arr elements
 arr.sort! #ascending order
 arr.sort  { |a,b| b-a } #descending order
-
 
 #hashes these are objects which contains key value pairs
 
@@ -155,7 +153,11 @@ def multipleargs(*args)
 end
 
 #function overloading does  not work in ruby
-
+=begin 
+Ruby does not support method overloading because it is a dynamically typed language 
+it identifies method using function name not by the type of parameters or 
+number of parameters if function with name and different in number of parameters is 
+defined then it replaces the previous one
 
 #function overloading 
 def test(a)
