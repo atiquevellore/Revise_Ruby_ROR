@@ -1,0 +1,40 @@
+Ruby memory management and Garbage Collection
+
+
+Ruby uses two types of heap for memory allocation 
+1. malloc heap(strings & data structures)
+2. object heap(ruby object)
+
+
+Ruby Garbage Collection explanation in general 
+
+when an object is created memory is allocated for it. the object  stays for a while hopefully doing some work then after object is no longer in
+use then ruby marks the section of the object memory as available for future use by another objects
+
+Ruby heap is split into pages, pages contain slot, slot stores the object reference
+
+Ruby uses mark sweep algorithm for Garbage Collection with tricolor mark
+
+♻️ Ruby Garbage Collection Process
+1. Initialization:
+
+The Garbage Collector (GC) starts by tagging all objects in the heap with a white flag (considered unused for now).
+
+2. Mark Phase – Reachability Analysis:
+
+GC identifies all accessible (live) objects—these are reachable via variables/constants.
+
+These are temporarily marked gray.
+
+As GC traverses references from gray objects, they’re marked black (in-use), and traversal continues.
+
+Objects still white after this are unreachable (garbage).
+
+3. Sweep Phase – Memory Reclamation:
+
+All white-flagged objects (unreachable) are deleted.
+
+Their memory is returned to the heap.
+
+This completes the sweep phase.
+
