@@ -1,3 +1,4 @@
+
 routing is used to route   the incoming  request route to specified controller action
 
 #non restful api routes
@@ -58,7 +59,7 @@ end
 
 resources :homes do
     member do
-        get :pmeost
+        get :post
         post  :comment 
     end
 end
