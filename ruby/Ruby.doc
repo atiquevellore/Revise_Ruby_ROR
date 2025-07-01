@@ -1,6 +1,12 @@
 Ruby memory management and Garbage Collection
 
 
+
+A heap is a complete binary tree data structure that satisfies the heap property:
+* In a max heap, every parent node is greater than or equal to its children.
+* In a min heap, every parent node is less than or equal to its children.
+
+
 Ruby uses two types of heap for memory allocation 
 1. malloc heap(strings & data structures)
 2. object heap(ruby object)
