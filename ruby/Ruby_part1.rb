@@ -13,6 +13,12 @@ comments
 print "single line statement without a new line at end"
 puts "single line statement with a new line"
 
+> print("hello world")
+hello world => nil
+> puts("hello world")
+hello world
+ => nil
+
 #varaiables
 #ruby does need the variable type it automatically assume based on the provided value
 
@@ -22,10 +28,24 @@ a = 10
 #float variable
 b = 10.5
 
+3.1.4 :010 > a = 3.5
+ => 3.5
+3.1.4 :011 > a.class #.class is used to determine type of a variable
+ => Float
+3.1.4 :012 >
+
 #string variables
 c = "hello world"
 c.upcase! #convert string characters to uppercase
 c.downcase! #convert string characters to downcase
+
+
+# include function used to check str is present it only works for matching case 
+# !(bang operator saves the value in ruby)
+3.1.4 :024 > b.downcase!
+ => "hello str"
+3.1.4 :025 > b.include?("str")
+ => true
 
 #string interploation it can be used in logging
 puts "display #{C}"
@@ -45,8 +65,17 @@ puts "enter the user input"
 input = gets.chomp();
 
 
+#swapping two numbers without using inbuilt functions or temp variable
+a = 10
+b = 20 
+
+a=a+b
+b = a-b
+a = a-b
+
 #str built in functions
 str = "hello"
+str.length # gives length of the str
 str.reverse
 str.split('') #converts str into arr
 str.join(',') #  join the arrays of str chars into a single str
@@ -98,10 +127,56 @@ arr.shift #removes first element from arr
 #.. means it is inclusive range
 #... means it is exclusive range
 
+> for i in 1..10
+>   puts i
+> end
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+ => 1..10
+3.1.4 :009 > for i in 1...10
+3.1.4 :010 >   puts i
+> end
+1
+2
+3
+4
+5
+6
+7
+8
+9
+ => 1...10
+3.1.4 :012 >
 
-for i in 0..arr.length-1
-    print arr[i]
-end
+3.1.4 :012 > arr = [1,2,3,4]
+ => [1, 2, 3, 4]
+3.1.4 :013 > for i in 0...arr.length
+3.1.4 :014 >   puts arr[i]
+3.1.4 :015 > end
+1
+2
+3
+4
+ => 0...4
+3.1.4 :016 >
+
+# if you starting arr index with 1 then 
+3.1.4 :022 > for i in 1...arr.length
+3.1.4 :023 >   puts arr[i]
+3.1.4 :024 > end
+2
+3
+4
+ => 1...4
+3.1.4 :025 >
 
 
 
@@ -137,6 +212,23 @@ h = {
 #accessing has elements
 h["name"]
 
+#counting string of characters
+3.1.4 :040 > str.each_char { |char| h[char]+=1 }
+ => "helloworld"
+3.1.4 :041 > h
+ => {"h"=>1, "e"=>1, "l"=>3, "o"=>2, "w"=>1, "r"=>1, "d"=>1}
+3.1.4 :042 >
+
+
+3.1.4 :041 > h
+ => {"h"=>1, "e"=>1, "l"=>3, "o"=>2, "w"=>1, "r"=>1, "d"=>1}
+3.1.4 :042 > h.select{|key,value|  value <= 1 }
+ => {"h"=>1, "e"=>1, "w"=>1, "r"=>1, "d"=>1}
+3.1.4 :043 > h.select{|key,value|  value >= 2 }
+ => {"l"=>3, "o"=>2}
+3.1.4 :044 >
+
+
 #looping through hash elements
 h.each {|key,value| puts "key: #{key}, value #{value}"}
 
@@ -158,7 +250,7 @@ Ruby does not support method overloading because it is a dynamically typed langu
 it identifies method using function name not by the type of parameters or 
 number of parameters if function with name and different in number of parameters is 
 defined then it replaces the previous one
-
+=end 
 #function overloading 
 def test(a)
     return a
@@ -175,63 +267,16 @@ puts test(10+9)
 
 multipleargs(1,2,,3,[1,3,5,7])
 
-#json
+#grouping without using groupby
 
-fakejsondata = [
-{
-    "userId": 1,
-    "id": 1,
-    "name": "first user",
-    "subject": "english",
-    "marks":  "100"
-},
-{
-  "userId": 2,
-    "id": 2,
-    "name": "second user",
-    "subject": "maths",
-    "marks":  "90"
-} ,
-{
-  "userId": 3,
-    "id": 3,
-    "name": "third user",
-    "subject": "maths",
-    "marks":  "100"
-    } ,
-{
-  "userId": 4,
-    "id": 4,
-    "name": "fourth user",
-     "subject": "english",
-    "marks":  "60"
-},
-{
-  "userId": 5,
-    "id": 5,
-    "name": "fourth user",
-     "subject": "english",
-    "marks":  "100"
-}
-]
-
-grouped_data = {}
+words = ["apple","banana", "cherry", "date", "fig", "grape"]
 
 
-fakejsondata.each do |record|
-    name = record[:name]
-    marks = record[:marks]
+grouped = {}
 
-    #checking hash
-    if grouped_data[name] 
-          grouped_data[name] = marks if grouped_data[name] < marks
-    else
-        grouped_data[name] = marks
-    end
+words.each do |word|
+    key = word.length
+    group[key] ||= []
+    group[key] << word
 end
 
-puts grouped_data
-
-#group the json data based on specific element
-
-record.group_by {|item| item[:id]}
