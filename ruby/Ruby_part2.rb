@@ -14,80 +14,102 @@ end
 puts divide_by_zero
 
 # Blocks example
-# Demonstrates the use of blocks with the `each` method.
-[1, 2, 3, 4].each { |num| puts num * 2 }
+=begin 
+blocks are anoymous functions that can be passed into other function
 
-# Yield example
-# Demonstrates the use of `yield` to pass control to a block.
-def cube(arr)
-    yield arr
+the difference between  blocks and procs, lamda 
+is that the blocks are not objects and procs and lamdas are the object
+
+
+-Procs 
+
+procs are the objects that encapsulate the block code 
+they do not check the  number of arguments  and assign nil 
+if they are missing
+
+class User < ApplicationRecord
+    scope :active,Proc.new { where(status: 'active')}
 end
 
-print cube([1, 2, 3, 4, 5]) { |arr| arr.map { |ele| ele**3 } }
+User.active
 
-# File handling with yield
-# Demonstrates file handling with a block using `yield`.
-def with_file(filename)
-    file = File.open(filename, "w")
-    yield file
-    file.close
+
+- lambdas 
+lamdas are anyonomus function that are objects of Procs
+the check the number of argument when invoked and raise error if there is
+a mismatch
+
+lambda_example = lambda {|name| puts "my  name is #{name}" }
+
+lambda_example.call("david")
+
+
+Ruby Clousures
+a closure is a block of code that can be passed around and executed later, 
+while retaining access to the variables in the scope where it was defined.
+
+def greet
+    name = "Alice"
+    yield(name)
 end
 
-with_file("test.txt") { |file| file.write("Hello Ruby") }
-
-# Procs example
-# Demonstrates the use of `Proc` objects.
-square = Proc.new { |ele| ele * ele }
-puts "Using procs: #{[2, 4, 6, 8].collect(&square)}"
-
-# Lambda example
-# Demonstrates the use of lambdas, which are similar to Procs but stricter in argument checking.
-square_lambda = ->(ele) { ele * ele }
-puts "Using lambda: #{[2, 4, 6, 8].map(&square_lambda)}"
+greet {|n| puts "Hello #{n}" }
 
 
-def square(arr)
-    yield arr
-end
-print square([1,2,3,4,5]) {|arr| arr.map(&square)}
+demo_proc = Proc.new {|num1,num2| puts num1*num2}
+
+[1].each(&demo_proc)
+# will get nill error instead of number of arguments missing 
+
+
+demo_lambda = lambda { |num1,num2| puts num1*num2}
+
+will get number of arguments error
+
+[1].each(&demo_lambda)
+
+
+=end
 
 #object oriented programming
 
 #class template
-
 =begin
 difference @ and @@
-@  belongs to single instance
-@ is scoped at class level variable is can be modified and share across class
+@  belongs to single instance ,not share ,usecase used for  object specific initialization 
+@@ is scoped at class level variable is can be modified and share across all instances and
+subclasses 
 level variables
 =end
+
+ => 0
+3.1.4 :194 > class Car
+3.1.4 :195 >   attr_accessor :name,:price
+3.1.4 :196 >   @@total_cars = 0
+3.1.4 :197 >   def initialize(name,price)
+3.1.4 :198 >     @name = name
+3.1.4 :199 >     @price = price
+3.1.4 :200 >     @@total_cars+=1
+3.1.4 :201 >   end
+3.1.4 :202 >
+3.1.4 :203 >   def car_data
+3.1.4 :204 >     puts "name of car: #{@name} and price: #{@price}"
+3.1.4 :205 >   end
+3.1.4 :206 >
+3.1.4 :207 >   def self.total_cars
+3.1.4 :208 >     @@total_cars
+3.1.4 :209 >   end
+3.1.4 :210 > end
+ => :total_cars
+3.1.4 :211 > c1 = Car.new("swift dzire",700000)
+ => #<Car:0x000071d12106be40 @name="swift dzire", @price=700000>
+3.1.4 :212 > Car.total_cars
+ => 1
+
+
 #global variable
 $gvar = "globak"
 
-# Object-oriented programming
-# Demonstrates global, class, and instance variables.
-$gvar = "global"
-
-class Test
-    @@count = 0 # Class variable
-
-    def initialize(name)
-        @name = name # Instance variable
-    end
-
-    def increment_count
-        @@count += 1
-    end
-
-    def print_count_and_name
-        puts "Name: #{@name}"
-        puts "Count: #{@@count}"
-    end
-end
-
-obj1 = Test.new("Atique")
-obj1.increment_count
-obj1.print_count_and_name
 
 # Getter and setter methods
 # Demonstrates the use of `attr_accessor` for getter and setter methods.
@@ -194,83 +216,209 @@ d1 = Derived.new
 d1.public_method
 d1.access_protected_method
 
-# Uncommenting the following lines will raise errors
 # p1.private_method # Private methods cannot be accessed directly.
 # p1.protected_method # Protected methods cannot be accessed outside the class hierarchy.
 
+# Public methods can be accessed by anyone — both inside and outside the class.
+# They can be called by instances of the class and by subclasses.
 
-# Overall description:
-# Private methods are limited to the class level. They can only be accessed 
-# by other methods within the same class and cannot be accessed by instances 
-# of the class.
+# Protected methods can be accessed within the class and by instances of the same
+# class or subclasses. They cannot be accessed directly from outside the class
+# (e.g., instance.method will fail if method is protected).
 
-# Public methods can be accessed by instances of a class and can also 
-# be accessed by subclasses or inherited classes.
+# Private methods can only be accessed within the same class, without an explicit
+# receiver. Even other instances of the same class cannot call them directly.
 
-# Protected methods can be accessed within the same class and by subclasses,
-# but not by objects of the class outside of its methods or the subclass.
 
-class Parent
-    def public_method
-      puts "I am public!"
-    end
-  
-    protected
-        def protected_method
-        puts "I am protected!"
-        end
-end  
-class Child < Parent
-    def call_protected
-      protected_method # Accessing protected method within the subclass
-    end
+class Person
+  private
+
+  def secret
+    "Ruby is fun"
+  end
+
+  def say_secret
+    secret         # ✅ works (no receiver)
+  end
+
+  def leak_secret(other)
+    other.secret   # ❌ error! can't call private method with explicit receiver
+  end
 end
-  
-  parent = Parent.new
-  child = Child.new
-  
-  parent.public_method    # => "I am public!"
-  parent.protected_method # => Error: NoMethodError, as protected is not accessible directly from outside
-  
-  child.call_protected    # => "I am protected!" (accessible within the subclass)
-  
 
-=begin
-#difference between super and super()
-super
-Use when you want to pass the same arguments to the superclass method
-super()
-Use when you want to call the superclass method without passing any arguments
-=end
+p1 = Person.new
+p2 = Person.new
 
-#example of super()
+puts p1.say_secret         # ✅ works
+puts p1.leak_secret(p2)    # ❌ NoMethodError
 
+class Person
+  def initialize(age)
+    @age = age
+  end
+
+  def older_than?(other)
+    self.age > other.age   # ✅ allowed with explicit receiver
+  end
+
+  protected
+
+  def age
+    @age
+  end
+end
+
+p1 = Person.new(30)
+p2 = Person.new(25)
+
+puts p1.older_than?(p2)  # ✅ true
+puts p1.age              # ❌ NoMethodError
+
+
+# Difference between super and super()
+# super
+#   - Calls the superclass method with the same arguments as the current method.
+# super()
+#   - Calls the superclass method with no arguments, regardless of the current method's arguments.
+
+
+You're not alone! `super`, `super()`, and `super(args)` **can be confusing at first** — but once you see them all side-by-side, it clicks. Let's break them down **with clear and complete examples**.
+
+---
+
+## 🧠 Understanding `super` Variants in Ruby
+
+| Syntax       | What it does                                                  |
+| ------------ | ------------------------------------------------------------- |
+| `super`      | Calls parent method with **same arguments** as current method |
+| `super()`    | Calls parent method with **no arguments**                     |
+| `super(arg)` | Calls parent method with **custom arguments**                 |
+
+---
+
+## ✅ Let's define a base class: `Animal`
+
+```ruby
 class Animal
-    def sound(speak)
-        puts "Animal sound: #{speak}"
-    end
+  def speak(sound = "generic sound")
+    puts "Animal speaks: #{sound}"
+  end
+end
+```
+
+---
+
+### 1️⃣ `super`: Passes same arguments as the current method
+
+```ruby
+class Dog < Animal
+  def speak(sound)
+    puts "Dog prepares to speak"
+    super  # passes `sound` to Animal#speak
+    puts "Dog finished speaking"
+  end
+end
+
+Dog.new.speak("Woof")
+```
+
+🟢 **Output:**
+
+```
+Dog prepares to speak
+Animal speaks: Woof
+Dog finished speaking
+```
+
+---
+
+### 2️⃣ `super()`: Passes **no arguments**, even if this method received some
+
+```ruby
+class Dog < Animal
+  def speak(sound)
+    puts "Dog prepares to speak"
+    super()  # ignores sound, calls Animal#speak with no args
+    puts "Dog finished speaking"
+  end
+end
+
+Dog.new.speak("Woof")
+```
+
+🟡 **Output:**
+
+```
+Dog prepares to speak
+Animal speaks: generic sound
+Dog finished speaking
+```
+
+---
+
+### 3️⃣ `super("Bark")`: Passes **custom arguments**
+
+```ruby
+class Dog < Animal
+  def speak(sound)
+    puts "Dog prepares to speak"
+    super("Bark")  # forces "Bark" to be passed regardless of input
+    puts "Dog finished speaking"
+  end
+end
+
+Dog.new.speak("Woof")
+```
+
+🟢 **Output:**
+
+```
+Dog prepares to speak
+Animal speaks: Bark
+Dog finished speaking
+```
+
+---
+
+## ✅ Bonus: With `initialize` methods
+
+```ruby
+class Animal
+  def initialize(name)
+    puts "Animal initialized with name: #{name}"
+  end
 end
 
 class Dog < Animal
-    super("Woof")
+  def initialize(name, breed)
+    super(name)  # pass only name to Animal
+    puts "Dog initialized with breed: #{breed}"
+  end
 end
 
-dog = Dog.new
-dog.sound("Woof") # Calls the method from the Animal class
+Dog.new("Bruno", "Labrador")
+```
 
-#example of super
+🟢 **Output:**
 
-class Animal
-    def sound(speak)
-        puts "Animal Sound"
-    end
-end
+```
+Animal initialized with name: Bruno
+Dog initialized with breed: Labrador
+```
 
-class Dog < Animal
-    super()
-end
-dog = Dog.new
-dog.sound # Calls the method from the Animal class
+---
+
+## ✅ Summary Chart
+
+| Use           | Effect                                 |
+| ------------- | -------------------------------------- |
+| `super`       | Passes all current arguments to parent |
+| `super()`     | Passes **no** arguments                |
+| `super(x, y)` | Passes only **specified** arguments    |
+
+---
+
+Let me know if you want to practice a small exercise with all 3 — happy to help!
 
 
 # Modules
@@ -295,7 +443,7 @@ m1 = MathOp.new
 puts m1.print_circumference(10.5)
 
 
-#include vs extend
+#include vs extend 
 # `include` is used to mix in a module's methods as instance methods.
 # `extend` is used to mix in a module's methods as class methods.
 module MathOperations
@@ -412,3 +560,33 @@ c = C.new
 c.method_a # Inherited from A
 c.method_b # Inherited from B
 c.method_c # Defined in C
+
+
+
+#include, prepend, extend
+
+module A 
+
+    def Hello 
+        "Hello from module A"
+    end
+end
+
+module B 
+
+    def Hello 
+        "Hello from module B"
+    end
+end
+
+class C
+    include A 
+    extend B 
+    prepend B
+
+    def Hello 
+        "Hello from class C"
+    end 
+
+    
+end
