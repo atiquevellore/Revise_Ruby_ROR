@@ -1,0 +1,8 @@
+# ask your interviewer what features(4-5) you need to Design 
+
+
+1. store and get images 
+2. like, comments on image ,post, videos 
+3. follow someone 
+4. publish newsfeed
+

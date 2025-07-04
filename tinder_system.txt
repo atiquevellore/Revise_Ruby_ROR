@@ -1,0 +1,15 @@
+Tinder architecture 
+1. store profiles(Images) - 5 images 
+2. Recommoned Matches - (no of active users)
+3. Note the matches 
+4. Direct Messaging 
+
+
+images as file vs blob
+images should be storaged as file 
+1.cheaper
+2.faster 
+3. CDN 
+4. profile_idimage_id|fileurl(DFS)
+
+best approach is to used (activestorage + s3 bucket)

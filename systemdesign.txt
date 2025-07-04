@@ -1,0 +1,221 @@
+Scalability
+
+
+Scalability is a property of system that handles growing amount of load by adding resources to the system 
+
+How can system grow 
+1. more users
+2. more features
+3. more data 
+4. more complexity
+5.more Geographies
+
+how to scale a System 
+
+1. Vertical Scaling or Scale-up(buying bigger machine)
+Vertical scaling, also known as scaling up, 
+refers to the process of increasing the 
+capacity or capabilities of an individual hardware or software component within a system.
+2. Horizontal Scaling (buy more machines)
+Horizontal scaling, also known as scaling out, 
+refers to the process of increasing the capacity or 
+performance of a system by adding more machines or servers to distribute the workload across a larger number of individual units.
+
+major differences between 
+Horizontal vs Vertical
+
+1. load Balancing Required
+2. RESILIENT (one of the server fails then it can 
+be redirected to other working server)
+3. Network calls (RPC)
+4. Data Inconsistency
+5. scales well users increase
+
+
+Vertical
+1. No load Balancing Required
+2. Single Point of Failure
+3. Inter Process Communication
+4. Data Consistency
+5. Hardware limit
+
+
+Consistenct Hashing 
+
+
+Load Balancing : the concept of taking N servers and Balancing  the load 
+evenly across the servers 
+
+One simple way would be hashing all requests and then sending them to the assigned server.
+
+Load Balancing is process of distributing incoming 
+tasks or  Network traffics across multiple 
+server to improve the performance and reliability of a system 
+
+Advantages of Load Balancing
+1. Higher reliability(high availability)
+if your web server crashes , the load balancer can instantly 
+route user to a backup server 
+
+2. Better performance
+3.Maintenance Flexibility
+
+Most common Load Balancing techniques 
+
+1.Round Robin 
+disadvantage
+server configuration are not taken in consideration for 
+while assign the request to a server through load balancer
+if s1 is configurations are very low and 
+number of requests are high in the queuue then delay will happen 
+
+2. Weighted Round Robin 
+server configuration are taken in consideration 
+
+3. sticky round robin 
+
+4.Least Connections
+
+the load balancer tracks the number of acitve Connections
+each server is handling and always directs new requests to
+the server with fewest acitve Connections
+
+5.hash Based
+it captures the clientId or userId 
+redirected session requests to same server 
+
+Throughput vs latency 
+
+throughput defn 
+number of requests per second 
+or number of transaction per minute
+
+throughput can be increased by adding more resources 
+such as CPUs,Servers
+
+latency
+time delay for the 
+APM(Application Performance Mentoring)
+
+to reduce latency
+1.caching
+2.Optimize codes 
+3.Reduce Network Hopes 
+
+Message queuue / Task queue
+Message queue is combination of 
+Heartbeat or healthcheck for servers 
+Persistent System such as database 
+Notifier when a server is failed 
+load balancer which eliminates the duplicates 
+requests
+
+it takes persists them and assign them to 
+correct server waits for it completeion 
+it is taking too long then assign task to the 
+next server
+
+example :RabbitMQ
+
+Microservics vs monolith
+
+A monolith Application  is a single unified unit 
+while a Microservice architecture is a collection of smaller 
+independently deployable services
+
+Advantages  of monolith architecture 
+1. easy deployment
+2. Development
+3. easy debugging
+
+disadvantages 
+scaling the application becomes a challenge
+making a small change in a single function requries 
+compiling and testing the entire platform 
+more context about the application
+
+
+reliability: error could entire application(single point of failure 
+)
+lack of Flexibility
+
+Microservice
+Microservice is an architectural method that relies on a 
+series of independently deployabable services
+
+1. Agile development 
+2. Flexibile Scalimng
+3. independently deployabable
+4. High reliability
+
+disadvantage
+debugging challenges when we have lot of services
+
+database indexing 
+it eliminates full scan table 
+it performs the binary search log n 
+
+
+Database sharding 
+each database server is thus a shard and 
+we say that the data is partitioned
+
+if it is a single database server 
+then it is not sharding and not partitioning 
+
+if the data is split then it is 
+partitioning not database sharding 
+
+if the data is not split 
+but the database server are multiple 
+then it is sharding 
+
+Advantages
+handles large reads and writes 
+increase overall storage capacity
+Higher availability
+
+disadvantages
+-operationally complex
+-cross shard queries expensive
+
+Caching 
+they save them 
+avoid redudant api calls 
+reduce database load
+avoid repeated computation
+
+caching policy matters 
+cache placement matters
+
+CDN (Content Delivery Network)
+Content Delivery Networks are a bunch of servers spread across the globe to serve information. These networks are available on rent to deliver static content quickly to nearby users.
+
+
+API Design (stateless)
+1.Naming of the resource is important 
+it should have relevant use case name 
+2.Parameters defining
+3. Response object defining matters 
+4.defining relevant error response 
+matters such as 
+400- bad request
+401- Unauthorized 
+403- forbidden
+404- Not found
+405- method not allowed 
+429- too many requests
+500- internal server errror 
+409 - resource already exists 
+502 - bad gateway
+504- gateway timeout 
+503- service unavaialable
+5. resource of the api, 
+namespace like versioing the 
+routing endpoint to the controller 
+correct 
+6.doing everything at single function 
+7.Pagination (limit of records and )
+8. JSON Serialization 
+9. Consistency 
+10.cache 
