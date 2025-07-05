@@ -1,32 +1,85 @@
-student has many blogs
-blog belong_to student
+#n+1 problem example 
 
-Blog.all.each do |blog|
-    puts blog.student.email
+=begin
+ n+1 problem
+ 1 query to fetch all the posts
+ n queries to fetch all the comments associated with each post
+ (11 posts, 11 queries to fetch all the comments)
+=end
+
+Eager loading is the process of retrieving 
+associated records of a model in a single query, 
+rather than executing separate queries for each associated record.
+
+posts = Post.limit(10)
+
+
+post.each do |post|
+    puts post.comments.count
 end
 
-1 query for fetching all the blogs
-n qureries to fetch all the stduents email associated with blogs
-n blogs (1 query fetch all blogs, will take n queries to fectch associated student blog record )
+# eagrer loading 
 
-eager loading
------
-
-# Eager loading is the process whereby a query loads a resource as soon 
-# as the code is executed .it also loads the  related entities(assocation) as part of the query
-Blog.includes(:student).each do |blog|
-    puts blog.student.email
+posts = Post.includes(:comments).limit(10)
+posts.each do |post|
+    puts post.comments.count
 end
 
-Blog.preload(:student).each do |blog|
-    puts blog.student.email
-end
+=begin
+ 1 query to fetch all the posts
+ 1 query to fetch all the comments associated with each post
+(11 posts, 2 query to fetch all the comments)
+=end
 
-diff between preload and includes
-where query only work on includes
-@blogs = Blog.includes(:student).references(:student).where('students.first_name = ?', 'Ravi')
+work differently:
 
-eager_load(Left outer join)
-Blog.eager_load(:student).each do |blog|
-    puts blog.student.email
-end
+1. **`preload`** (Separate Queries)
+  - Loads associated records in **separate queries**.
+  - Does **not** use SQL joins.
+  - Example:
+    ```ruby
+    # Fetch books and their authors (separate queries)
+    books = Book.preload(:author).limit(5)
+    books.each do |book|
+     puts book.author.name
+    end
+    ```
+  - Generates:
+    ```sql
+    SELECT * FROM books LIMIT 5;
+    SELECT * FROM authors WHERE id IN (...);
+    ```
+  - Best when you **don’t need** to filter/order by associated records.
+
+2. **`eager_load`** (Single Query with `JOIN`)
+  - Uses **LEFT OUTER JOIN** to load everything in **one query**.
+  - Example:
+    ```ruby
+    # Fetch books and their authors, and filter by author name (single query with JOIN)
+    books = Book.eager_load(:author).where(authors: { name: "Alice" })
+    books.each do |book|
+     puts book.author.name
+    end
+    ```
+  - Generates:
+    ```sql
+    SELECT books.*, authors.* FROM books LEFT OUTER JOIN authors ON books.author_id = authors.id WHERE authors.name = 'Alice';
+    ```
+  - Best when you **need** to filter/order by associated records.
+
+3. **`includes`** (Hybrid Approach)
+   - Rails **decides** whether to use `preload` (separate queries) or `eager_load` (JOIN) based on query conditions.
+   - Example:
+     ```ruby
+     Book.includes(:author)
+     ```
+   - If filtering by `author.name`, Rails **switches to `eager_load`**.
+   - Otherwise, it **defaults to `preload`**.
+
+### Summary:
+| Method       | Queries | Uses `JOIN`? | Best for |
+|-------------|---------|-------------|----------|
+| `preload`   | Multiple | No | Simple association loading |
+| `eager_load` | Single  | Yes | Filtering/sorting by association |
+| `includes`  | Adaptive | Sometimes | Flexible loading |
+
